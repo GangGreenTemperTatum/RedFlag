@@ -59,14 +59,6 @@ such as release candidates.
 
 ## Getting Started
 
-### Ambiguity
-
-When running the code in either Batch or CI mode, messages to workflows or the console will omit terminology indicating that it is "retrieving" and "evaluating" a certain number of "commits from PR(s)".
-
-Typically, commits can only be made via pull requests (PRs) if you have [branch protection or repository rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule) in place, which is a commonly adopted approach. Consequently, once a PR is squashed and merged, it appears as a single commit in the default branch.
-
-The terminology used may vary depending on how you choose to run RedFlag, as you can specify `--from` and `--to` commit SHAs or branches.
-
 ### Installation
 
 ##### Use a Virtual Environment
@@ -86,7 +78,7 @@ Alternatively, if you'd like to use Poetry, clone the repo and use `poetry insta
 
 ### Setup Credentials
 
-Credentials can be set using...
+Credentials can be set using:
 1. Environment variables 
 1. A `.env` file
 1. CLI parameters
@@ -120,7 +112,9 @@ export RF_JIRA_TOKEN=your-token-here
 
 ### Usage
 
-Here are some examples on how to run RedFlag in batch mode.
+When running RedFlag, output messages will indicate it is retrieving and evaluating commits from Pull Requests (PRs). Typically, commits are made via PRs if you have [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) or [repository rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) in place. Consequently, once a PR is squashed and merged, it appears as a single commit in the target branch. The terminology used may vary depending on how you choose to run RedFlag, as you can specify `--from` and `--to` commit SHAs or branches.
+
+Here are some examples on how to run RedFlag in batch mode:
 
 ```shell
 # Using branch names:
@@ -145,8 +139,8 @@ By default, RedFlag produces an HTML report that can be opened in a browser.
 
 # CI Mode
 
-RedFlag can be run in CI pipelines to flag commits (sometimes which span multiple PRs) and add the appropriate reviewers.
-This mode uses GitHub Actions to run RedFlag on every commit and post a comment if
+RedFlag can be run in CI pipelines to flag PRs and add the appropriate reviewers.
+This mode uses GitHub Actions to run RedFlag on every PR and post a comment if
 the PR requires a review.
 
 [![CI Mode][docs-ci-mode]][docs-ci-mode-url]
