@@ -16,7 +16,7 @@
 
 RedFlag leverages AI to determine high-risk code changes. 
 Run it in batch mode to scope manual security testing of release candidates, 
-or run it in your CI pipelines to flag commits, either spanning a single or multiple PRs and add the appropriate reviewers. 
+or run it in your CI pipelines to flag PRs and add the appropriate reviewers. 
 Despite being a security tool, RedFlag can be leveraged for almost any team 
 as it's configuration makes it infinitely flexible.
 <br />
