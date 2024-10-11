@@ -64,7 +64,7 @@ async def review_evaluation(
         'format_instructions': review_parser.get_format_instructions()
     }
 
-    # Check the token count if we pass all files in the commit range.
+    # Check the token count if we pass all files in scope
     result.token_count = llm.get_num_tokens(review_prompt.format(**prompt_input))
 
     llm_response = await review_chain \
@@ -224,8 +224,8 @@ async def do_evaluations(
 
                 if jira:
                     result.ticket = get_jira_ticket_from_pr_title(
-                        jira,
-                        pr.title
+                        client=jira,
+                        title=pr.title
                     )
 
                 # Create task
