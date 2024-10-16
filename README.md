@@ -99,20 +99,6 @@ Use a [Personal Access Token](https://docs.github.com/en/github/authenticating-t
 export RF_GITHUB_TOKEN=your-token-here
 ```
 
-##### Slack Integration *(Optional)*
-
-1. [Create a Slack App](https://api.slack.com/quickstart)
-1. [Request required scopes](https://api.slack.com/quickstart#scopes)
-1. [Install and authorize the App](https://api.slack.com/quickstart#installing)
-1. Add environment variables or configuration entries when running RedFlag
-
-```shell
-export RF_SLACK_TOKEN="xoxb-X-Y-Z"
-export RF_SLACK_CHANNEL="C00********"
-```
-
-*Don't forget to invite the bot to the channel to avoid a `channel_not_found` error*.
-
 ##### Jira API Token *(Optional)*
 First, set a Jira URL (`https://your-org.atlassian.net`) in the configuration file (`jira_url`), as a CLI parameter (`--jira-url`), or as an environment variable (`RF_JIRA_URL`).
 
@@ -123,6 +109,20 @@ set it as an environment variable:
 export RF_JIRA_USER=your-username-here
 export RF_JIRA_TOKEN=your-token-here
 ```
+
+##### Slack Token *(Optional)*
+
+1. [Create a Slack App](https://api.slack.com/quickstart)
+1. [Request required scopes](https://api.slack.com/quickstart#scopes)
+1. [Install and authorize the App](https://api.slack.com/quickstart#installing)
+1. Add environment variables or configuration entries when running RedFlag
+
+```shell
+export RF_SLACK_TOKEN=xoxb-slack-token-here
+export RF_SLACK_CHANNEL=C0123456789
+```
+
+*Don't forget to invite the bot to the channel to avoid a `channel_not_found` error*.
 
 ### Usage
 
