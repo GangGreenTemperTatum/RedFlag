@@ -103,7 +103,7 @@ def pretty_print_config_table(
             # Hide secrets
             if full_key in secret_keys:
                 if value is not None:
-                    value = value[:4] + '*' * (len(value) - 4)
+                    value = value[:6] + '*' * (len(value) - 4)
 
             # Prettify None values
             if value is None:
