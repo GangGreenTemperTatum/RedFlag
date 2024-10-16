@@ -61,7 +61,7 @@ class Slack():
            "text":
                {
                 "type": "mrkdwn",
-                "text": f"*Model Review Reason:*\n\n{reason_in_scope}"
+                "text": f"\n{reason_in_scope}"
                }
        }
 

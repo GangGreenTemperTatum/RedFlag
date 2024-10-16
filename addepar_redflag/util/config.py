@@ -75,7 +75,7 @@ def get_default_config():
         'slack': {
             'token': None,
             'channel': None,
-            'headline': ':warning: RedFlag Security Review Alert :warning:'
+            'headline': '🚩 RedFlag Security Review Alert'
         },
         'prompts': {
             'review': {
