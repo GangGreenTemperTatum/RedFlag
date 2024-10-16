@@ -112,7 +112,8 @@ export RF_JIRA_TOKEN=your-token-here
 
 ### Usage
 
-When running RedFlag, output messages will indicate it is retrieving and evaluating commits from Pull Requests (PRs). Typically, commits are made via PRs if you have [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) or [repository rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) in place. Consequently, once a PR is squashed and merged, it appears as a single commit in the target branch. The terminology used may vary depending on how you choose to run RedFlag, as you can specify `--from` and `--to` commit SHAs or branches.
+> **Note** 
+> Highlights information that users should take into account, even when skimming. When running RedFlag, output messages will indicate it is retrieving and evaluating commits from Pull Requests (PRs). Typically, commits are made via PRs if you have [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) or [repository rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) in place. Consequently, once a PR is squashed and merged, it appears as a single commit in the target branch. The terminology used may vary depending on how you choose to run RedFlag, as you can specify `--from` and `--to` commit SHAs or branches.
 
 Here are some examples on how to run RedFlag in batch mode:
 
