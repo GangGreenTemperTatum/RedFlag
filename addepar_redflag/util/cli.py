@@ -55,8 +55,9 @@ def cli():
     parser.add_argument('--max-commits', type=int, help=f'The max number of commits to feed to the LLM. (default: {default_config["max_commits"]})')
     parser.add_argument('--no-output-html', action='store_false', dest='output_html', help='Flag to not output the results as HTML.')
     parser.add_argument('--no-output-json',  action='store_false', dest='output_json', help='Flag to not output the results as JSON.')
-    parser.add_argument('--slack-token', help='Slack OAUTH token to authenticate to the Slack API.')
-    parser.add_argument('--slack-channel', help='Slack channel ID to post results to.')
+    parser.add_argument('--slack-token', help='Slack OAuth token to authenticate to the Slack API.')
+    parser.add_argument('--slack-channel', help='Slack channel ID to post messages to.')
+    parser.add_argument('--slack-headline', help='Slack message headline.')
     common_arguments(parser, default_config)
 
     # Eval subparser
