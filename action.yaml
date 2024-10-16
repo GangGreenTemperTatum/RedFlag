@@ -45,11 +45,15 @@ inputs:
   slack_token:
     type: string
     required: false
-    description: 'Slack bot token for authenticating to Slack API'
+    description: 'Bot token for authenticating to Slack.'
   slack_channel:
      type: string
      required: false
-     description: 'Slack channel ID for posting to Slack'
+     description: 'Channel ID for posting to Slack.'
+  slack_headline:
+     type: string
+     required: false
+     description: 'Message headline for posting to Slack.'
   reviewer_teams:
     type: string
     required: false
@@ -118,11 +122,8 @@ runs:
         if [ -n "${{ inputs.jira_user }}" ]; then
           cli_opts+=" --jira-user ${{ inputs.jira_user }}"
         fi
-        if [ -n "${{ inputs.slack_token }}" ]; then
-          cli_opts+=" --slack-token ${{ inputs.slack_token }}"
-        fi
-        if [ -n "${{ inputs.slack_channel }}" ]; then
-          cli_opts+=" --slack-channel ${{ inputs.slack_channel }}"
+        if [ -n "${{ inputs.slack_headline }}" ]; then
+          cli_opts+=" --slack-headline ${{ inputs.slack_headline }}"
         fi
         if [ -n "${{ inputs.config_file }}" ]; then
           cli_opts+=" --config config-active.yaml"

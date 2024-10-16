@@ -168,7 +168,7 @@ def get_final_config(cli_args):
     
     # Override current config with values from the CLI args
     cli_dict = dict()
-    nested_keys = ['jira', 'bedrock']
+    nested_keys = ['jira', 'bedrock', 'slack']
     default_config = get_default_config()
     for key, value in vars(cli_args).items():
         if value is not None:
