@@ -75,6 +75,7 @@ def get_default_config():
         'slack': {
             'token': None,
             'channel': None,
+            'headline': ':warning: RedFlag Security Review Alert :warning:'
         },
         'prompts': {
             'review': {
@@ -152,7 +153,8 @@ def get_final_config(cli_args):
         },
         'slack': {
             'token': getenv('RF_SLACK_TOKEN'),
-            'channel': getenv('RF_SLACK_CHANNEL')
+            'channel': getenv('RF_SLACK_CHANNEL'),
+            'headline': getenv('RF_SLACK_HEADLINE')
         }
     }
 

@@ -29,7 +29,6 @@ from .util.github import (
     matches_template_text,
     filter_commit
 )
-from .util.slack import Slack
 from .util.jira import get_jira_ticket_from_pr_title
 from .util.llm import (
     build_file_context,
@@ -37,6 +36,7 @@ from .util.llm import (
     build_prompt,
     MAX_PARSER_RETRIES
 )
+from .util.slack import Slack
 
 
 async def query_model(
@@ -507,40 +507,30 @@ async def redflag(
                     MessageType.SUCCESS
                 )
 
-    # retrieve Slack configuration
-    slack_token = config.get('slack').get('token'),
-    slack_channel = config.get('slack').get('channel'),
-
-    if slack_token and slack_channel:
-        slack = Slack(token=slack_token, channel=slack_channel)
-        
-        # check if there are in-scope items
+    # If Slack client is configured, send the results
+    if slack:
+        # Check if there are in-scope items
         if in_scope:
-            slack = Slack(
-                token=config.get('slack').get('token'),
-                channel=config.get('slack').get('channel'),
+            blocks = slack.build_slack_blocks(
+                config.get('slack').get('headline'),
+                {
+                    "in_scope": in_scope,
+                    "out_of_scope": out_of_scope,
+                }
             )
 
-            slack_payload = payload
-            if slack_payload:
-                slack.post_message(slack_payload)
+            if blocks:
+                slack.post_message(blocks)
 
-            pretty_print(
-                f'Successfully sent message to Slack for secops review, channel #{slack_channel}',
-                MessageType.SUCCESS
-            )
-
+                pretty_print(
+                    f'Successfully sent message to Slack in channel #{slack.channel}',
+                    MessageType.SUCCESS
+                )
         else:
             pretty_print(
-                'No secops reviews to send to Slack',
+                'No reviews to send to Slack',
                 MessageType.INFO
             )
-
-    else:
-        pretty_print(
-            'Slack token or channel not configured',
-             MessageType.WARNING
-        )
 
     if errored:
         file_path = Path(output_dir or '.') / f'Errors-{filename}.json'
