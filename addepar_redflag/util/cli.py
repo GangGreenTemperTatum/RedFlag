@@ -48,6 +48,7 @@ async def run_redflag(github, jira, config):
     await redflag(
         github=github,
         jira=Jira,
+        slack=Slack,
         config=config
     )
 
@@ -86,7 +87,7 @@ def cli():
 
     # Validate Bedrock configuration
     final_config['bedrock']['profile'] = validate_aws_credentials(final_config['bedrock']['profile'])
-    
+
     # Instantiate GitHub object
     github_token = final_config['github_token']
     auth = Auth.Token(github_token) if github_token else None
@@ -107,7 +108,7 @@ def cli():
                 MessageType.FATAL
             )
             exit(1)
-            
+
         jira = Jira(
             url=final_config['jira']['url'],
             username=jira_user,
