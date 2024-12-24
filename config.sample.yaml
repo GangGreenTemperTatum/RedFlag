@@ -27,6 +27,14 @@ to: v0.139.3
 # However, if needed, it can be set here.
 github_token: token
 
+# Slack token, channel and message header to send messages to a channel
+slack:
+  channel: channel-id
+  token: token
+  headline: |
+    :rotating_light: RedFlag Security Review Alert :rotating_light:
+    :eyes: Review Requested :eyes:
+
 jira:
   # Omit jira_url to skip using Jira.
   url:

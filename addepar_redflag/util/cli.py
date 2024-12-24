@@ -5,6 +5,7 @@ from sys import exit
 from atlassian import Jira
 from dotenv import load_dotenv
 from github import Auth, Github
+from .slack import Slack
 from langchain.globals import set_debug
 
 from ..evaluate import do_evaluations
@@ -68,6 +69,9 @@ def cli():
     parser.add_argument('--max-commits', type=int, help=f'The max number of commits to feed to the LLM. (default: {default_config["max_commits"]})')
     parser.add_argument('--no-output-html', action='store_false', dest='output_html', help='Flag to not output the results as HTML.')
     parser.add_argument('--no-output-json',  action='store_false', dest='output_json', help='Flag to not output the results as JSON.')
+    parser.add_argument('--slack-token', help='Slack OAuth token to authenticate to the Slack API.')
+    parser.add_argument('--slack-channel', help='Slack channel ID to post messages to.')
+    parser.add_argument('--slack-headline', help='Slack message headline.')
     common_arguments(parser, default_config)
 
     # Eval subparser
@@ -110,6 +114,24 @@ def cli():
             password=jira_token
         )
 
+    # Instantiate Slack object
+    slack = None
+    if final_config['slack']['channel']:
+        slack_channel = final_config['slack']['channel']
+        slack_token = final_config['slack']['token']
+
+        if not (slack_token and slack_channel):
+            pretty_print(
+                'Slack auth tokens and a channel ID are required for this operation. To skip the Slack integration, leave --slack-token and --slack-channel blank.',
+                MessageType.FATAL
+            )
+            exit(1)
+
+        slack = Slack(
+            token=slack_token,
+            channel=slack_channel
+        )
+
     # Debug LLM output
     if final_config['debug_llm']:
         set_debug(True)
@@ -128,6 +150,7 @@ def cli():
             asyncio.run(run_redflag(
                 github=github,
                 jira=jira,
+                slack=slack,
                 config=final_config
             ))
     except Exception as e:
